@@ -19,16 +19,17 @@ import java.util.NoSuchElementException;
 public class MaxHeapTree {
 
     private Lista_Canciones Heap = new Lista_Canciones();
-    private int size;
+    public int size = 0;
     private int maxsize = 100;
 
     private static final int FRONT = 1;
 
     public MaxHeapTree(Cancion cancion) {
         this.maxsize = maxsize;
-        this.size = 0;
-        Heap.setSize(maxsize + 1);
-        Heap.insert(cancion, 0);
+        
+        Heap.insert(cancion, size);
+        size++;
+        Heap.setSize(size);
     }
 
     private int parent(int pos) {
@@ -75,9 +76,9 @@ public class MaxHeapTree {
     }
 
     public void insert(Cancion element) {
-        Heap.insert(element, ++size);
-        
-        int current = size;
+        Heap.insert(element, size);
+        size++;
+        int current = size-1;
 
         while (Heap.get(current).getPriority() > Heap.get(parent(current)).getPriority()) {
             swap(current, parent(current));
@@ -100,5 +101,8 @@ public class MaxHeapTree {
         maxHeapify(FRONT);
         return popped;
         
+    }
+    public Lista_Canciones retHeap(){
+        return Heap;
     }
 }
