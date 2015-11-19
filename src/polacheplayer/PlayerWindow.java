@@ -262,13 +262,19 @@ public class PlayerWindow extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        tree = new MaxHeapTree(todas.get(0));
-        for (int i = 1; i < cont; i++) {
+
+        
+        for (int i = 0; i < cont; i++) {
+            if(i==0)
+                tree = new MaxHeapTree(todas.get(i));
+            else
+                tree.insert(todas.get(i));
             System.out.println("pruebita: "+ todas.get(i).getName()+" "+todas.get(i).getPriority());
-            tree.insert(todas.get(i));
+            
         }
         Lista_Canciones orden = new Lista_Canciones();
         orden = tree.retHeap();
+        
         for (int i = 0; i < tree.size-1; i++) {
             model1.addElement(orden.get(i).getName());
         }
